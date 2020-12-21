@@ -226,7 +226,7 @@ class Struct:
 
 def parse_config(path_to_json=r'./config.json'):
 
-    with open(path_to_json) as f:
+    with open(path_to_json, "r") as f:
       data = json.load(f)
     args = Struct(**data)
 
