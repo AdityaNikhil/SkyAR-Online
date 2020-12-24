@@ -12,6 +12,8 @@ import streamlit as st
 import json
 from IPython.core.display import display
 import imageio
+import wandb
+
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
@@ -24,6 +26,8 @@ generate realistic and dramatic sky backgrounds in videos with controllable styl
 sky editing methods that either focus on static photos or require inertial measurement units integrated in smartphones on shooting videos,
  our method is purely vision-based, without any requirements on the capturing devices, and can 
  be well applied to either online or offline processing scenarios. Our method runs in real-time and is free of user interactions. 
+
+ [Checkout wandb log of this project here](https://wandb.ai/aditya-digala-gmail-com/SkyAR-Streamlit)
 
 **Hit Run after configuring!**
 '''
@@ -249,9 +253,9 @@ def st_capture(output_func):
         stdout.write = new_write
         yield
 
-
 output = st.empty()
 if st.button('Run'):
+    wandb.init(project="SkyAR-Streamlit")  
     if video_file and gif_file:
         with st_capture(output.code):
             sf = SkyFilter(args)
@@ -263,29 +267,14 @@ if st.button('Run'):
 
         with imageio.get_writer('demo-sky.gif', mode='I') as writer:
             for img in sf.replaced_sky_list[7:47]:
-                writer.append_data(img)
+                writer.append_data(img) 
 
         st.image('demo-sky.gif', caption='Output',
            use_column_width=True)
 
-# # In[11]:
+        wandb.log({"video": [wandb.Video('demo-sky.gif', fps=4, format="gif"),
+                 wandb.Video('demo-img.gif', fps=4, format="gif")]})
 
-
-# # Check out your results at './SkyAR/demo.avi' and './SkyAR/demo-cat.avi'. 
-# # Download them and enjoy.
-
-# # If you would like to pre-view your results. Run the following to see the animated 
-# # results of the first 40 frames.
-
-# import matplotlib.animation as animation
-# from IPython.display import HTML
-
-# fig = plt.figure(figsize=(4,8))
-# plt.axis('off')
-# ims = [[plt.imshow(img[:,:,::-1], animated=True)] for img in sf.output_img_list[0:40]]
-# ani = animation.ArtistAnimation(fig, ims, interval=50)
-
-# HTML(ani.to_jshtml())
 
 
 
