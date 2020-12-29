@@ -1,5 +1,4 @@
 matplotlib
-wandb
 streamlit
 scikit-image
 scikit-learn
