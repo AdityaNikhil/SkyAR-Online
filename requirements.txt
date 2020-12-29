@@ -1,9 +1,10 @@
+-f https://download.pytorch.org/whl/torch_stable.html
 matplotlib
 streamlit
 scikit-image==0.16.2
 scikit-learn
 scipy
 numpy
-torch
-torchvision
+torch==1.6.0+cpu
+torchvision==0.7.0+cpu
 opencv-contrib-python
