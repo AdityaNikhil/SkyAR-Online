@@ -105,6 +105,7 @@ def save_response_content(response, destination):
 parser = argparse.ArgumentParser(description='SKYAR')
 args = utils.parse_config(path_to_json="./config/config-annarbor-castle.json")
 
+args.ckptdir = "./checkpoints_G_coord_resnet50"
 args.datadir = video_file
 args.skybox = gif_file
 args.in_size_w = 384 # input size to sky matting model
