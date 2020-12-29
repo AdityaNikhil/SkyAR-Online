@@ -1,6 +1,6 @@
 matplotlib
 streamlit
-scikit-image
+scikit-image==0.16.2
 scikit-learn
 scipy
 numpy
