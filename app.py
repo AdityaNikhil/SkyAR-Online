@@ -12,6 +12,7 @@ import streamlit as st
 import json
 from IPython.core.display import display
 import imageio
+from pathlib import Path
 # import wandb
 
 
@@ -158,6 +159,25 @@ class SkyFilter():
         self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
         self.net_G.to(device)
         self.net_G.eval()
+        
+    cloud_model_location = "1waCarAttTQ61KFvVv2So08NneWdpwFbp"
+
+    @st.cache
+    def load_model():
+
+        save_dest = Path('model')
+        save_dest.mkdir(exist_ok=True)
+
+        f_checkpoint = Path("best_ckpt.pt")
+
+        if not f_checkpoint.exists():
+            with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+                from GD_download import download_file_from_google_drive
+                download_file_from_google_drive(cloud_model_location, f_checkpoint)
+
+        model = torch.load(f_checkpoint, map_location=device)
+        model.eval()
+        return model        
 
 
     def write_video(self, img_HD, syneth):
@@ -186,7 +206,8 @@ class SkyFilter():
         img = torch.tensor(img).permute([2, 0, 1]).unsqueeze(0)
 
         with torch.no_grad():
-            G_pred = self.net_G(img.to(device))
+            G_pred = self.net_G(img.to(
+            ))
             G_pred = torch.nn.functional.interpolate(G_pred, (h, w), mode='bicubic', align_corners=False)
             G_pred = G_pred[0, :].permute([1, 2, 0])
             G_pred = torch.cat([G_pred, G_pred, G_pred], dim=-1)
