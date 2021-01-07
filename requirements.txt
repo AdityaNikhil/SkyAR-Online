@@ -1,10 +1,12 @@
--f https://download.pytorch.org/whl/torch_stable.html
-matplotlib
-streamlit
-scikit-image==0.16.2
-scikit-learn
-scipy
-numpy
-torch==1.6.0+cpu
-torchvision==0.7.0+cpu
 opencv-contrib-python
+scikit-image
+
+streamlit
+numpy
+torch
+torchvision
+pillow
+
+
+# Needed to download model
+requests
