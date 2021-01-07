@@ -162,7 +162,7 @@ class SkyFilter():
         
     cloud_model_location = "1waCarAttTQ61KFvVv2So08NneWdpwFbp"
 
-    @st.cache
+    
     def load_model(self):
 
         save_dest = Path('model')
