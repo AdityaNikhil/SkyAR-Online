@@ -172,8 +172,11 @@ class SkyFilter():
                 from GD_download import download_file_from_google_drive
                 download_file_from_google_drive(cloud_model_location, f_checkpoint)
 
-        model = torch.load(f_checkpoint, map_location=device)
-        model.eval()
+        checkpoint = torch.load(f_checkpoint, map_location=device)
+        self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
+        self.net_G.to(device)
+        self.net_G.eval()
+        
 #         return model        
 
 
