@@ -159,12 +159,9 @@ class SkyFilter():
 #         self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
 #         self.net_G.to(device)
 #         self.net_G.eval()
-        
-    cloud_model_location = "1waCarAttTQ61KFvVv2So08NneWdpwFbp"
-
-    
+            
     def load_model(self):
-
+        cloud_model_location = "1waCarAttTQ61KFvVv2So08NneWdpwFbp"
         save_dest = Path('model')
         save_dest.mkdir(exist_ok=True)
 
