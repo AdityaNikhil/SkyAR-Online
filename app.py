@@ -152,18 +152,18 @@ class SkyFilter():
 
         self.save_jpgs = args.save_jpgs
 
-    def load_model(self):
-        # load pretrained sky matting model
-        print('loading the best checkpoint...')
-        checkpoint = torch.load(os.path.join(self.ckptdir, 'best_ckpt.pt'))
-        self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
-        self.net_G.to(device)
-        self.net_G.eval()
+#     def load_model(self):
+#         # load pretrained sky matting model
+#         print('loading the best checkpoint...')
+#         checkpoint = torch.load(os.path.join(self.ckptdir, 'best_ckpt.pt'))
+#         self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
+#         self.net_G.to(device)
+#         self.net_G.eval()
         
     cloud_model_location = "1waCarAttTQ61KFvVv2So08NneWdpwFbp"
 
     @st.cache
-    def load_model():
+    def load_model(self):
 
         save_dest = Path('model')
         save_dest.mkdir(exist_ok=True)
@@ -177,7 +177,7 @@ class SkyFilter():
 
         model = torch.load(f_checkpoint, map_location=device)
         model.eval()
-        return model        
+#         return model        
 
 
     def write_video(self, img_HD, syneth):
