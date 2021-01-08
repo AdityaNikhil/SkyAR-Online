@@ -177,6 +177,10 @@ class SkyFilter():
         self.net_G.to(device)
         self.net_G.eval()
         
+        # To free memory!
+        del f_checkpoint
+        del checkpoint
+        
 #         return model        
 
 
