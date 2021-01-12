@@ -13,9 +13,9 @@ import json
 from IPython.core.display import display
 import imageio
 from pathlib import Path
-# import wandb
+import wandb
 
-
+wandb.login(key='d6f763e736d7607803f56ed4eb12c57267fcc4dc')
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 '''
@@ -281,7 +281,7 @@ def st_capture(output_func):
 
 output = st.empty()
 if st.button('Run'):
-    # wandb.init(project="SkyAR-Streamlit")  
+    wandb.init(project="SkyAR-Streamlit")  
     if video_file and gif_file:
         with st_capture(output.code):
             sf = SkyFilter(args)
@@ -298,8 +298,8 @@ if st.button('Run'):
         st.image('demo-sky.gif', caption='Output',
            use_column_width=True)
 
-#         wandb.log({"video": [wandb.Video('demo-sky.gif', fps=4, format="gif"),
-#                  wandb.Video('demo-img.gif', fps=4, format="gif")]})
+        wandb.log({"video": [wandb.Video('demo-sky.gif', fps=4, format="gif"),
+                 wandb.Video('demo-img.gif', fps=4, format="gif")]})
 
 
 
