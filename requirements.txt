@@ -6,6 +6,7 @@ scikit-image==0.16.2
 scikit-learn
 scipy
 matplotlib
+wandb
 
 
 # Needed to download model
